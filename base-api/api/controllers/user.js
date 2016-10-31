@@ -15,7 +15,7 @@ function getAllUsers(req, res) {
 }
 
 function getUser(req, res) {
-  User.findOne({
+  User.findAll({
     where: {
       id: req.swagger.params.id.value,
     }
