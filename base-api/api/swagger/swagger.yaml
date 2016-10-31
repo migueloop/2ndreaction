@@ -4,9 +4,9 @@ info:
   title: Hello World App
 # during dev, should point to your local machine
 host: localhost:8000
-# basePath prefixes all resource paths 
+# basePath prefixes all resource paths
 basePath: /
-# 
+#
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -49,6 +49,29 @@ paths:
       description: Get a specific user by id
       # used as the method name of the controller
       operationId: getUser
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/User"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /user/search/{text}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: user
+    parameters:
+      - name: text
+        in: path
+        description: the text of the search to retrieve
+        required: true
+        type: string
+    get:
+      description: Get a specific user by text search
+      # used as the method name of the controller
+      operationId: search
       responses:
         "200":
           description: Success

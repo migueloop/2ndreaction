@@ -30,7 +30,40 @@ function getUser(req, res) {
     })
 }
 
+function search(req, res) {
+  User.findAll({
+    where: {
+      $or: {
+        first: {
+              $like: '%'+req.swagger.params.text.value+'%',
+        },
+        last: {
+              $like: '%'+req.swagger.params.text.value+'%',
+        },
+        email: {
+              $like: '%'+req.swagger.params.text.value+'%',
+        },
+        phone: {
+              $like: '%'+req.swagger.params.text.value+'%',
+        },
+        cell: {
+              $like: '%'+req.swagger.params.text.value+'%',
+        }
+      }
+    }
+  })
+    .then(function(users) {
+      res.status(200).json(users);
+    })
+    .catch(function(err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    })
+}
+
 module.exports = {
   getAllUsers: getAllUsers,
   getUser: getUser,
+  search: search
 };

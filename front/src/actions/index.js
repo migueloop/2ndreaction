@@ -32,7 +32,7 @@ const fetchUsers = reddit => dispatch => {
       .then(response => response.json())
       .then(json => dispatch(receiveUsers(reddit, json)))
   }else{
-    return fetch(`http://localhost:8000/user/${reddit}`)
+    return fetch(`http://localhost:8000/user/search/${reddit}`)
       .then(response => response.json())
       .then(json => dispatch(receiveUsers(reddit, json)))
   }
