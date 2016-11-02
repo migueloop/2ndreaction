@@ -1,45 +1,45 @@
 export const REQUEST_USERS = 'REQUEST_USERS'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
-export const SELECT_USER = 'SELECT_USER'
+export const SEARCH_USER = 'SEARCH_USER'
 export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
 
-export const selectReddit = reddit => ({
-  type: SELECT_USER,
-  reddit
+export const typedSearchText = searchText => ({
+  type: SEARCH_USER,
+  searchText
 })
 
-export const invalidateReddit = reddit => ({
+export const invalidateReddit = searchText => ({
   type: INVALIDATE_REDDIT,
-  reddit
+  searchText
 })
 
-export const requestUsers = reddit => ({
+export const requestUsers = searchText => ({
   type: REQUEST_USERS,
-  reddit
+  searchText
 })
 
-export const receiveUsers = (reddit, json) => ({
+export const receiveUsers = (searchText, json) => ({
   type: RECEIVE_USERS,
-  reddit,
+  searchText,
   users: json,
   receivedAt: Date.now()
 })
 
-const fetchUsers = reddit => dispatch => {
-  dispatch(requestUsers(reddit))
-  if(reddit === ''){
+const fetchUsers = searchText => dispatch => {
+  dispatch(requestUsers(searchText))
+  if(searchText === ''){
     return fetch(`http://localhost:8000/users/`)
       .then(response => response.json())
-      .then(json => dispatch(receiveUsers(reddit, json)))
+      .then(json => dispatch(receiveUsers(searchText, json)))
   }else{
-    return fetch(`http://localhost:8000/user/search/${reddit}`)
+    return fetch(`http://localhost:8000/user/search/${searchText}`)
       .then(response => response.json())
-      .then(json => dispatch(receiveUsers(reddit, json)))
+      .then(json => dispatch(receiveUsers(searchText, json)))
   }
 }
 
-const shouldFetchUsers = (state, reddit) => {
-  const users = state.usersByReddit[reddit]
+const shouldFetchUsers = (state, searchText) => {
+  const users = state.usersByReddit[searchText]
   if (!users) {
     return true
   }
@@ -49,8 +49,8 @@ const shouldFetchUsers = (state, reddit) => {
   return users.didInvalidate
 }
 
-export const fetchUsersIfNeeded = reddit => (dispatch, getState) => {
-  if (shouldFetchUsers(getState(), reddit)) {
-    return dispatch(fetchUsers(reddit))
+export const fetchUsersIfNeeded = searchText => (dispatch, getState) => {
+  if (shouldFetchUsers(getState(), searchText)) {
+    return dispatch(fetchUsers(searchText))
   }
 }

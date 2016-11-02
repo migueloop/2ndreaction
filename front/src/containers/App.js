@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { selectReddit, fetchUsersIfNeeded, invalidateReddit } from '../actions'
+import { typedSearchText, fetchUsersIfNeeded, invalidateReddit } from '../actions'
 import Search from '../components/Search'
 import Users from '../components/Users'
 import s from '../styles/styles.css'
@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   handleChange = nextSearchText => {
-      this.props.dispatch(selectReddit(nextSearchText))
+      this.props.dispatch(typedSearchText(nextSearchText))
   }
 
   handleRefreshClick = e => {

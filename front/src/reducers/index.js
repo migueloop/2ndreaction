@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
 import {
-  SELECT_USER, INVALIDATE_REDDIT,
+  SEARCH_USER, INVALIDATE_REDDIT,
   REQUEST_USERS, RECEIVE_USERS
 } from '../actions'
 
 const searchText = (state = '', action) => {
   switch (action.type) {
-    case SELECT_USER:
-      return action.reddit
+    case SEARCH_USER:
+      return action.searchText
     default:
       return state
   }
@@ -50,7 +50,7 @@ const usersByReddit = (state = { }, action) => {
     case REQUEST_USERS:
       return {
         ...state,
-        [action.reddit]: users(state[action.reddit], action)
+        [action.searchText]: users(state[action.searchText], action)
       }
     default:
       return state
