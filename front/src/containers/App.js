@@ -54,14 +54,14 @@ class App extends Component {
         <p>
           {lastUpdated &&
             <span>
-              Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
+              {/* Last updated at {new Date(lastUpdated).toLocaleTimeString()}. */}
               {' '}
             </span>
           }
           {!isFetching &&
             <a href="#"
                onClick={this.handleRefreshClick}>
-              Refresh
+              {/* Refresh */}
             </a>
           }
         </p>
