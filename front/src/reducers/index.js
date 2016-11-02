@@ -4,7 +4,7 @@ import {
   REQUEST_USERS, RECEIVE_USERS
 } from '../actions'
 
-const selectedReddit = (state = '', action) => {
+const searchText = (state = '', action) => {
   switch (action.type) {
     case SELECT_USER:
       return action.reddit
@@ -59,7 +59,7 @@ const usersByReddit = (state = { }, action) => {
 
 const rootReducer = combineReducers({
   usersByReddit,
-  selectedReddit
+  searchText
 })
 
 export default rootReducer
