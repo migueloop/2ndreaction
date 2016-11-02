@@ -10,7 +10,7 @@ const Users = ({users}) => (
             </div>
             <div className="col-xs-12 col-sm-9">
                 <span className="name">{user.first} {user.last}</span><br></br>
-                <ButtonToolbar>
+                <ButtonToolbar className="hidden-xs">
                   <OverlayTrigger placement="bottom" overlay={<Tooltip id="phone_tooltip"><strong>{user.phone}</strong></Tooltip>}>
                   <span className="glyphicon glyphicon-earphone text-muted c-info"></span>
                   </OverlayTrigger>
@@ -21,9 +21,9 @@ const Users = ({users}) => (
                     <span className="glyphicon glyphicon-comment text-muted c-info"></span>
                   </OverlayTrigger>
                 </ButtonToolbar>
-                <span className="visible-xs"> <span className="text-muted">{user.cell}</span><br></br></span>
-                <span className="visible-xs"> <span className="text-muted">{user.phone}</span><br></br></span>
-                <span className="visible-xs"> <span className="text-muted">{user.email}</span><br></br></span>
+                <div className="visible-xs"> <span className="glyphicon glyphicon-earphone text-muted c-info">  {user.phone}</span><br></br></div>
+                <div className="visible-xs"> <span className="glyphicon glyphicon-envelope text-muted c-info">  {user.email}</span><br></br></div>
+                <div className="visible-xs"> <span className="glyphicon glyphicon-comment text-muted c-info">  No comments yet</span><br></br></div>
             </div>
             <div className="clearfix"></div>
         </li>
